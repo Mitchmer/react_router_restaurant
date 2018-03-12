@@ -1,5 +1,5 @@
 100.times do
-  Dish.create (
+  Dish.create(
     name: Faker::Beer.name,
     price: Faker::Commerce.price.to_f,
   )
