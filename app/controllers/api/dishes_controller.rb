@@ -15,7 +15,7 @@ class Api::DishesController < ApplicationController
     if dish.save
       render json: dish
     else
-      render json: dish.errors, status: 422
+      render json: { errors: @api_dish.errors.full_messages.join(',') }, status: :unprocessable_entity
     end
   end
 
