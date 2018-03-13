@@ -1,6 +1,10 @@
 import React from 'react'
+import { Route, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import Form from './Form'
+import Dashboard from './Dashboard'
+import ProtectedRoute from './ProtectedRoute'
+
 
 class Dish extends React.Component {
   state = { dish: {}, edit: false }
@@ -20,6 +24,15 @@ class Dish extends React.Component {
     axios.put(`/api/dishes/${this.props.match.params.id}`, { dish })
       .then( res => this.setState({ dish: res.data, edit: false }) )
   } 
+
+  // delete = (dish) => {
+  //   axios.delete(`/api/dishes/${this.props.match.params.id}`, { dish })
+  //     return (
+
+  //       //<ProtectedRoute path="/dashboard" component={Dashboard} />
+  //     )
+      
+  // }
 
   show() {
     let { dish: { name, price }} = this.state
@@ -41,6 +54,7 @@ class Dish extends React.Component {
       <div>
         { edit ? this.edit() : this.show() }
         <button onClick={this.toggleEdit}>{ edit ? 'Cancel' : 'Edit' }</button>
+        <button onClick={this.delete}>Delete</button>
       </div>
     )
   }
